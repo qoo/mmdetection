@@ -20,7 +20,9 @@ rois = np.hstack((batch_ind, rois))
 
 feat = torch.randn(
     num_imgs, 16, feat_size, feat_size, requires_grad=True, device='cuda:0')
-rois = torch.from_numpy(rois).float().cuda()
+# rois = torch.from_numpy(rois).float().cuda()
+rois = torch.from_numpy(rois).float()
+
 inputs = (feat, rois)
 print('Gradcheck for roi align...')
 test = gradcheck(RoIAlign(3, spatial_scale), inputs, atol=1e-3, eps=1e-3)
